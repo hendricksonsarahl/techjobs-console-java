@@ -2,10 +2,11 @@ package org.launchcode.techjobs.console;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 /**
- * Created by LaunchCode
+ * Created by LaunchCode and Sarah Hendrickson
  */
 public class TechJobs {
 
@@ -61,10 +62,11 @@ public class TechJobs {
                 String searchTerm = in.nextLine();
 
                 if (searchField.equals("all")) {
-                    System.out.println("Search all fields not yet implemented.");
+                    printJobs(JobData.findByValue(searchTerm));
                 } else {
                     printJobs(JobData.findByColumnAndValue(searchField, searchTerm));
                 }
+
             }
         }
     }
@@ -110,7 +112,29 @@ public class TechJobs {
 
     // Print a list of jobs
     private static void printJobs(ArrayList<HashMap<String, String>> someJobs) {
+        /*
+        Printed output should look like:
+        *****
+        position type: Data Scientist / Business Intelligence
+        name: Sr. IT Analyst (Data/BI)
+        employer: Bull Moose Industries
+        location: Saint Louis
+        core competency: Statistical Analysis
+        *****
+         */
 
-        System.out.println("printJobs is not implemented yet");
+        // If search returned 0 results, print message. Otherwise, iterate over the loop printing each job
+        // entry when the user selects "1" to list the jobs, and then "0" to list them all
+        if (someJobs.size() == 0) {
+            System.out.println("No jobs match your search, please try different search terms or try back later!");
+        } else {
+            for (HashMap<String, String> job : someJobs) {
+                System.out.println("*****");
+                for (Map.Entry<String, String> category : job.entrySet()) {
+                    System.out.println(category.getKey() + ": " + category.getValue());
+                }
+                System.out.println("*****\n");
+            }
+        }
     }
 }

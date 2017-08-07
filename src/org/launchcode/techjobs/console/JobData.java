@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * Created by LaunchCode
+ * Created by LaunchCode and Sarah Hendrickson
  */
 public class JobData {
 
@@ -62,9 +62,10 @@ public class JobData {
      * with "Enterprise Holdings, Inc".
      *
      * @param column   Column that should be searched.
-     * @param value Value of teh field to search for
+     * @param value Value of the field to search for
      * @return List of all jobs matching the criteria
      */
+
     public static ArrayList<HashMap<String, String>> findByColumnAndValue(String column, String value) {
 
         // load data, if not already loaded
@@ -79,6 +80,42 @@ public class JobData {
             if (aValue.contains(value)) {
                 jobs.add(row);
             }
+        }
+
+        return jobs;
+    }
+
+    /**
+     * Returns results of search the jobs data value, using
+     * inclusion of the search term, searching ALL columns.
+     *
+     * @param value Value of the field to search for
+     * @return List of all jobs matching the criteria, excluding duplicates
+     */
+
+    public static ArrayList<HashMap<String, String>> findByValue(String value) {
+
+        // load data, if not already loaded
+        loadData();
+        // instantiate a new ArrayList called jobs
+        ArrayList<HashMap<String, String>> jobs = new ArrayList<>();
+        // make the user's entry lowercase to check against data
+        value = value.toLowerCase();
+        // Iterate over all data in allJobs
+        for (HashMap<String, String> row: allJobs) {
+            // For each key in each row
+            for (String column : row.keySet()) {
+                // Get the value and convert to lowercase
+                String aValue = row.get(column);
+                aValue = aValue.toLowerCase();
+                // If you find the value in the aValue string AND jobs doesn't have the row already
+                if (aValue.contains(value) && !jobs.contains(row)) {
+                    // Go ahead and add the row
+                    jobs.add(row);
+                }
+
+            }
+
         }
 
         return jobs;
@@ -120,7 +157,7 @@ public class JobData {
             isDataLoaded = true;
 
         } catch (IOException e) {
-            System.out.println("Failed to load job data");
+            System.out.println("Error1: Failed to load job data");
             e.printStackTrace();
         }
     }
