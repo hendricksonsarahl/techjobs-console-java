@@ -1,9 +1,6 @@
 package org.launchcode.techjobs.console;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * Created by LaunchCode and Sarah Hendrickson
@@ -32,7 +29,7 @@ public class TechJobs {
 
         // Allow the user to search until they manually quit
         while (true) {
-
+            // User can select "0" and quit the program from top-level menu in console
             String actionChoice = getUserSelection("View jobs by:", actionChoices);
             if (actionChoice.equals("0")){
                 break;
@@ -46,9 +43,9 @@ public class TechJobs {
                 } else {
 
                     ArrayList<String> results = JobData.findAll(columnChoice);
-
                     System.out.println("\n*** All " + columnChoices.get(columnChoice) + " Values ***");
-
+                    // Sort the list alphabetically
+                    Collections.sort(results);
                     // Print list of skills, employers, etc
                     for (String item : results) {
                         System.out.println(item);
