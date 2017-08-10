@@ -52,7 +52,9 @@ public class JobData {
         // load data, if not already loaded
         loadData();
 
-        return allJobs;
+        //create a copy of allJobs that will be returned instead of the static allJobs in case of future CSV changes
+        ArrayList<HashMap<String, String >> allJobsCopy = new ArrayList<>(allJobs);
+        return allJobsCopy;
     }
 
     /**
