@@ -8,6 +8,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -79,11 +80,11 @@ public class JobData {
 
             String aValue = row.get(column);
             aValue = aValue.toLowerCase();
-
             if (aValue.contains(value)) {
                 jobs.add(row);
             }
         }
+
 
         return jobs;
     }

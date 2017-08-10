@@ -24,8 +24,9 @@ public class TechJobs {
 
         // Top-level menu options
         HashMap<String, String> actionChoices = new HashMap<>();
-        actionChoices.put("search", "Search");
-        actionChoices.put("list", "List");
+        actionChoices.put("1", "Search");
+        actionChoices.put("2", "List");
+        actionChoices.put("0", "Quit");
 
         System.out.println("Welcome to LaunchCode's TechJobs App!");
 
@@ -33,8 +34,10 @@ public class TechJobs {
         while (true) {
 
             String actionChoice = getUserSelection("View jobs by:", actionChoices);
-
-            if (actionChoice.equals("list")) {
+            if (actionChoice.equals("0")){
+                break;
+            }
+            else if (actionChoice.equals("2")) {
 
                 String columnChoice = getUserSelection("List", columnChoices);
 
